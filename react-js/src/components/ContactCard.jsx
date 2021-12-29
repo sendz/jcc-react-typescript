@@ -1,13 +1,7 @@
 import React, { useState } from "react"
+import PropTypes from "prop-types"
 
-type ContactCardProps = {
-    name: string,
-    phone: string,
-    age: number,
-    save?: () => void
-}
-
-export const ContactCard = ({name, phone, age, save}: ContactCardProps) => {
+function ContactCard({name, phone, age}) {
     const [isEditing, setEditMode] = useState(false)
     const [_name, setName] = useState(name)
     const [_phone, setPhone] = useState(phone)
@@ -36,7 +30,7 @@ export const ContactCard = ({name, phone, age, save}: ContactCardProps) => {
                 <li>Age:{' '}
                     <input 
                         type="number" 
-                        onChange={(event) => setAge(parseInt(event.target.value))} 
+                        onChange={(event) => setAge(event.target.value)} 
                         value={_age} 
                         readOnly={!isEditing}
                     />
@@ -48,3 +42,13 @@ export const ContactCard = ({name, phone, age, save}: ContactCardProps) => {
         </div>
     )
 }
+
+ContactCard.propTypes = {
+    name: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    age: PropTypes.number.isRequired,
+    save: PropTypes.func
+}
+
+export default ContactCard
+
