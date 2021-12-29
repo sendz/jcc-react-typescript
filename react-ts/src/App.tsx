@@ -7,6 +7,7 @@ import { ToDoListProvider } from './providers/ToDoList.provider';
 function App() {
   return (
     <ToDoListProvider>
+      Simple ToDo List App
       <ToDoListForm/>
       <ToDoList/>
     </ToDoListProvider>
