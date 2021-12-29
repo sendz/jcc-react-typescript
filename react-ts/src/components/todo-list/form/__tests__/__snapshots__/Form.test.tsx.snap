@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test for Form render snapshot 1`] = `
+Array [
+  <input
+    onChange={[Function]}
+    placeholder="Title"
+    type="text"
+    value=""
+  />,
+  <button
+    onClick={[Function]}
+  >
+    Save
+  </button>,
+]
+`;
