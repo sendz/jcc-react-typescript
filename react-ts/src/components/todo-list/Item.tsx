@@ -19,7 +19,7 @@ export const ToDoListItem = (props: ToDoListItemProps) => {
     }
 
     return (
-        <div>
+        <div className="todo-list-item">
             <input type="checkbox" checked={isChecked} onChange={onCheckboxClicked}/> {item.title}
         </div>
     )

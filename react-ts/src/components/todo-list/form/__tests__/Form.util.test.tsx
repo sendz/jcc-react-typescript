@@ -20,16 +20,20 @@ describe('Form Utility / Form State Testing', () => {
     
         act(() => {
             result.current.setTitle('Unit Testing')
+        })
+
+        expect(result.current.title).toEqual('Unit Testing')
+
+        act(() => {
             result.current.saveTodo()
         })
 
         expect(result.current.generateId()).toEqual("abcd")
         expect(mockAddTodo).toHaveBeenCalledTimes(1)
-        expect(result.current.title).toEqual('Unit Testing')
         expect(mockAddTodo).toHaveBeenCalledWith({
             id: "abcd",
             isDone: false,
-            title: ""
+            title: "Unit Testing"
         })
     })
 })

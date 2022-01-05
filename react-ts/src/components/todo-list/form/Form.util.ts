@@ -13,6 +13,7 @@ export const useFormUtils = () => {
             isDone: false
         }
         addTodo(todo)
+        setTitle("")
     }
 
     return {

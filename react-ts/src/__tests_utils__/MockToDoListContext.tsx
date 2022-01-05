@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import { ReactNode, useState } from "react"
 import { ToDoListContext, ToDoListContextInterface, ToDoListItemProps } from "../providers/ToDoList.provider"
 
 type IMockToDoListProvider = {
@@ -10,11 +10,34 @@ type IMockToDoListProvider = {
 }
 
 export const MockToDoListProvider = (props: IMockToDoListProvider) => {
+    const [todos, setTodos] = useState<ToDoListItemProps[]>([])
+
+    const addTodo = (todo: ToDoListItemProps) => {
+        setTodos(previousTodos => [
+            ...previousTodos,
+            todo
+        ])
+        props.addTodo?.(todo)
+    }
+
+    const updateTodo = (todo: ToDoListItemProps) => {
+        const index = todos.findIndex(data => data.id === todo.id)
+        let newTodos = [...todos]
+        newTodos[index] = todo
+        setTodos(newTodos)
+        props.updateTodo?.(todo)
+    }
+
+    const deleteTodo = (todo: ToDoListItemProps) => {
+        setTodos(previousTodos => previousTodos.filter(data => data !== todo))
+        props?.deleteTodo?.(todo)
+    }
+
     const mockToDoListContext = {
-        todos: props.todos || [],
-        addTodo: props.addTodo || jest.fn,
-        deleteTodo: props.deleteTodo || jest.fn,
-        updateTodo: props.updateTodo || jest.fn
+        todos: props.todos || todos,
+        addTodo,
+        deleteTodo,
+        updateTodo
     }
 
     return (
