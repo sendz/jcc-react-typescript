@@ -4,7 +4,8 @@ type ToDoListContextInterface = {
     todos: ToDoListItemProps[],
     addTodo: (todo: ToDoListItemProps) => void,
     deleteTodo: (todo: ToDoListItemProps) => void,
-    updateTodo: (todo: ToDoListItemProps) => void
+    updateTodo: (todo: ToDoListItemProps) => void,
+    addFreshTodos: (todos: ToDoListItemProps[]) => void,
 }
 
 const ToDoListContext = createContext({} as ToDoListContextInterface)
@@ -24,6 +25,10 @@ export type ToDoListItemProps = {
 export const ToDoListProvider = ({children}: ToDoListProviderProps) => {
     const [todos, setTodos] = useState<ToDoListItemProps[]>([])
 
+    const addFreshTodos = (todos: ToDoListItemProps[]) => {
+        setTodos(todos);
+    }
+
     const addTodo = (todo: ToDoListItemProps) => {
         setTodos(previousTodos => [
             ...previousTodos,
@@ -32,7 +37,7 @@ export const ToDoListProvider = ({children}: ToDoListProviderProps) => {
     }
 
     const deleteTodo = (todo: ToDoListItemProps) => {
-        setTodos(previousTodos => previousTodos.filter(data => data !== todo))
+        setTodos(previousTodos => previousTodos.filter(data => data.id !== todo.id))
     }
 
     const updateTodo = (todo: ToDoListItemProps) => {
@@ -46,7 +51,8 @@ export const ToDoListProvider = ({children}: ToDoListProviderProps) => {
         todos,
         addTodo,
         deleteTodo,
-        updateTodo
+        updateTodo,
+        addFreshTodos
     }
     return (
         <ToDoListContext.Provider value={context}>
