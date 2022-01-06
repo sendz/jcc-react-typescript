@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useToDoListContext } from "../../providers/ToDoList.provider";
+import { useToDoListService } from "../../services/ToDoListService";
 import { ToDoListItem } from "./Item";
 
 export const ToDoList = () => {
-    const { todos } = useToDoListContext();
+    const { todos, addFreshTodos } = useToDoListContext();
+    const {getTodos} = useToDoListService();
+
+    useEffect(() => {
+        (async () => {
+            const response = await getTodos()
+            addFreshTodos(response.data.data)
+        })()
+    }, [])
+
     if (todos.length === 0) {
         return (
             <div>Empty</div>
