@@ -5,6 +5,7 @@ import { useToDoListService } from "../../services/ToDoListService";
 
 type ToDoListItemProps = {
     item: RootToDoListItemProps
+    className?: string
 }
 
 export const ToDoListItem = (props: ToDoListItemProps) => {
@@ -28,7 +29,7 @@ export const ToDoListItem = (props: ToDoListItemProps) => {
     }
 
     return (
-        <Stack direction="horizontal" gap={3} style={{ justifyContent: 'space-between' }}>
+        <Stack className={props.className} direction="horizontal" gap={3} style={{ justifyContent: 'space-between' }}>
             <div><input id={item.id} type="checkbox" checked={isChecked} onChange={onCheckboxClicked}/> <label htmlFor={item.id}>{item.title}</label></div>
             {item.isDone &&
                 (<Button variant="danger" size="sm" onClick={deleteTodo}>Delete</Button>)
