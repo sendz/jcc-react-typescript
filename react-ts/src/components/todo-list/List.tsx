@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Col, Row } from "react-bootstrap";
 import { useToDoListContext } from "../../providers/ToDoList.provider";
 import { useToDoListService } from "../../services/ToDoListService";
 import { ToDoListItem } from "./Item";
@@ -21,11 +22,13 @@ export const ToDoList = () => {
     }
 
     return (
-        <>
+        <Row>
+            <Col>
             <h2>To Do</h2>
                 {todos.filter(item => !item.isDone).map(item => <ToDoListItem item={item} key={item.id}/>)}
             <h2>Done</h2>
                 {todos.filter(item => item.isDone).map(item => <ToDoListItem item={item} key={item.id}/>)}
-        </>
+            </Col>
+        </Row>
     )
 }

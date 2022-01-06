@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button, Stack } from "react-bootstrap";
 import { ToDoListItemProps as RootToDoListItemProps, useToDoListContext } from "../../providers/ToDoList.provider";
 import { useToDoListService } from "../../services/ToDoListService";
 
@@ -27,11 +28,11 @@ export const ToDoListItem = (props: ToDoListItemProps) => {
     }
 
     return (
-        <div>
-            <input id={item.id} type="checkbox" checked={isChecked} onChange={onCheckboxClicked}/> <label htmlFor={item.id}>{item.title}</label>
+        <Stack direction="horizontal" gap={3} style={{ justifyContent: 'space-between' }}>
+            <div><input id={item.id} type="checkbox" checked={isChecked} onChange={onCheckboxClicked}/> <label htmlFor={item.id}>{item.title}</label></div>
             {item.isDone &&
-                (<button onClick={deleteTodo}>Delete</button>)
+                (<Button variant="danger" size="sm" onClick={deleteTodo}>Delete</Button>)
             }
-        </div>
+        </Stack>
     )
 }
