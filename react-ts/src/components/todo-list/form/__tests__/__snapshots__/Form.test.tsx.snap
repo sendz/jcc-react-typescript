@@ -3,12 +3,14 @@
 exports[`snapshot test for Form render snapshot 1`] = `
 Array [
   <input
+    data-testid="input-title"
     onChange={[Function]}
     placeholder="Title"
     type="text"
     value=""
   />,
   <button
+    data-testid="save-button"
     onClick={[Function]}
   >
     Save

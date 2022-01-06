@@ -1,22 +1,25 @@
 import { useState } from "react"
+import { generateId } from "../../../helpers/generateId";
 import { ToDoListItemProps, useToDoListContext } from "../../../providers/ToDoList.provider"
-const { v4: uuid } = require('uuid')
 
 export const useFormUtils = () => {
-    const { addTodo } = useToDoListContext();
+    const { addTodo, todos } = useToDoListContext();
     const [title, setTitle] = useState<string>("")
+
     const saveTodo = () => {
         const todo: ToDoListItemProps = {
-            id: uuid(),
-            title,
+            id: generateId(),
+            title: title,
             isDone: false
         }
         addTodo(todo)
+        setTitle("")
     }
 
     return {
         title,
         setTitle,
-        saveTodo
+        saveTodo,
+        generateId
     }
 }

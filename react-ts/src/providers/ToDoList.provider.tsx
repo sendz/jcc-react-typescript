@@ -1,13 +1,13 @@
 import React, { createContext, useContext, useState } from "react"
 
-type ToDoListContextInterface = {
+export type ToDoListContextInterface = {
     todos: ToDoListItemProps[],
     addTodo: (todo: ToDoListItemProps) => void,
     deleteTodo: (todo: ToDoListItemProps) => void,
     updateTodo: (todo: ToDoListItemProps) => void
 }
 
-const ToDoListContext = createContext({} as ToDoListContextInterface)
+export const ToDoListContext = createContext({} as ToDoListContextInterface)
 
 export const useToDoListContext = () => useContext(ToDoListContext)
 
