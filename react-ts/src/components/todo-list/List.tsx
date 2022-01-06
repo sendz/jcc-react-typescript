@@ -25,9 +25,9 @@ export const ToDoList = () => {
         <Row>
             <Col>
             <h2>To Do</h2>
-                {todos.filter(item => !item.isDone).map(item => <ToDoListItem item={item} key={item.id}/>)}
+                {todos.filter(item => !item.isDone).map(item => <ToDoListItem className="todo-undone" item={item} key={item.id}/>)}
             <h2>Done</h2>
-                {todos.filter(item => item.isDone).map(item => <ToDoListItem item={item} key={item.id}/>)}
+                {todos.filter(item => item.isDone).map(item => <ToDoListItem className="todo-done" item={item} key={item.id}/>)}
             </Col>
         </Row>
     )
