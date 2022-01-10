@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { generateId } from "../../../helpers/generateId";
 import { ToDoListItemProps, useToDoListContext } from "../../../providers/ToDoList.provider"
 import { useToDoListService } from "../../../services/ToDoListService";
 const { v4: uuid } = require('uuid')
@@ -10,8 +11,8 @@ export const useFormUtils = () => {
     const [title, setTitle] = useState<string>("")
     const saveTodo = async () => {
         const todo: ToDoListItemProps = {
-            id: uuid(),
-            title,
+            id: generateId(),
+            title: title,
             isDone: false
         }
         const response = await serviceAddTodo(todo)
@@ -22,6 +23,7 @@ export const useFormUtils = () => {
     return {
         title,
         setTitle,
-        saveTodo
+        saveTodo,
+        generateId
     }
 }

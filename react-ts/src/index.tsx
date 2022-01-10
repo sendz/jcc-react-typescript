@@ -4,10 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ToDoListProvider } from './providers/ToDoList.provider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ToDoListProvider>
+      <App />
+    </ToDoListProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
