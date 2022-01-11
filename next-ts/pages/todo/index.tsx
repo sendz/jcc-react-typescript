@@ -1,4 +1,5 @@
-import { GetStaticProps, InferGetStaticPropsType } from "next";
+import { GetServerSideProps, GetStaticProps, InferGetServerSidePropsType, InferGetStaticPropsType } from "next";
+import Link from "next/link";
 
 const ToDo = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
     console.log("DATA", data)
@@ -8,9 +9,9 @@ const ToDo = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
         <div>
             {
                 data.map((item: any) => (
-                    <div key={item.id}>
+                    <Link href={`/todo/${item.id}`} key={item.id}>
                         {item.title}
-                    </div>
+                    </Link>
                 ))
             }
         </div>
@@ -18,9 +19,8 @@ const ToDo = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
     )
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
     const response = await fetch("http://localhost:1234/todo")
-    console.log("response", response)
     const { data } = await response.json();
 
     if (!data) {
