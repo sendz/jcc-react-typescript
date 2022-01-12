@@ -1,16 +1,42 @@
 import { InferGetServerSidePropsType, InferGetStaticPropsType } from "next"
+import { useEffect, useState } from "react"
 
 const ToDoDetail = ({ data }: any) => {
+    const [formData, setFormData] = useState<any>()
+    const [isEdit, setIsEdit] = useState(false)
+
+    const refetch = async (id: string) => {
+        const response = await fetch("http://localhost:1234/todo/" + id)
+        const { data } = await response.json();
+        setFormData(data)
+    }
+
+    useEffect(() => {
+        if (isEdit) {
+            (async () => {
+                await refetch(data.id)
+            })()
+        }
+    }, [isEdit, data])
+
     return (
         <>
-        To Do Detail
-        <div>
-            <ul>
-                <li>ID: {data.id}</li>
-                <li>Title: {data.title}</li>
-                <li>Done? {data.isDone.toString()}</li>
-            </ul>
-        </div>
+            To Do Detail
+            <div>
+                <ul>
+                    <li>ID: {data.id}</li>
+                    <li>Title: {data.title}</li>
+                    <li>Done? {data.isDone.toString()}</li>
+                </ul>
+            </div>
+            <div>
+                <button onClick={() => setIsEdit(true)}>Edit</button>
+            </div>
+            {isEdit && (
+                <form>
+                    <input value={formData?.title}/>
+                </form>
+            )}
         </>
     )
 }
