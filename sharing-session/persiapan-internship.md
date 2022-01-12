@@ -6,17 +6,18 @@
 - Culture Fit
   - Adaptasi
 
-- Tidak digaji, dan jangan tanyakan gaji
-- Perbanyak koneksi / channel / kenalan
+## Yang harus diingat
+
+- Tidak digaji, dan jangan tanyakan gaji, kecuali ditawari oleh tempat magang
+- Perbanyak koneksi / channel / kenalan yang berkualitas
 
 # Technical
 
 - Skill harus cocok dengan kebutuhan tempat magang
 - Minimum bisa coding di bahasa pemrograman tertentu, minimal 1
 - Minimal semester 7 untuk yang kuliah
-- Tidak akan ada minimum pengalaman
-- Solving Problem
-- Identify Issue
+- Solving Problem skill
+- Identify Issue skill
 
 # Persiapan Interview
 - Tanyakan Jobdesc
@@ -29,13 +30,14 @@
 - Mulai kerja sebagai Junior
 - Sertifikasi
 - Course (Coursera, Dicoding, JCC, Khan Academy)
-- Hackerank
+- Game Base (HackerRank, CodeCombat)
 
-## Untuk yang Intern
-- Jangan pernah tanya gaji
-
-## Untuk Perusahaan
-- Berikan gaji jika hasil kerja intern dirilis sebagai produk
-
-- Hemat
-- Tidak terikat kontrak / perjanjian kerja
+## List web pengembangan karir
+- [JCC](https://jabarcodingcamp.id/)
+- [GO-Academy](https://www.gojek.com/go-academy/)
+- [Coursera](https://www.coursera.org/)
+- [Udemy](https://www.udemy.com/)
+- [Khan Academy - Computer Programming](https://www.khanacademy.org/computing/computer-programming)
+- [Dicoding](https://www.dicoding.com/)
+- [HackerRank](https://www.hackerrank.com/)
+- [CodeCombat](https://codecombat.com/)
