@@ -137,9 +137,11 @@ Sebuah PWA haruslah responsive pada setiap ukuran layar, layar desktop dengan uk
 Selain itu, pengalaman pengguna (UX) dari PWA juga harus bisa beradaptasi dengan aplikasi native, seperti navigasi, notifikasi, performa, kecepatan saat membuka aplikasi, dan harus bisa dipasang sebagai aplikasi native (installable).
 
 ![Install Twitter](assets/install.png)
+
 _Pilihan untuk memasang PWA sebagai aplikasi native_
 
 ![Installed PWA](assets/installed-pwa.png)
+
 _Aplikasi yang dipasang dari PWA memiliki UX sebagai native app, perhatikan app bar / window bar yang tidak memiliki fungsi navigasi seperti di web browser_
 
 ## SAATNYA TUGAS
