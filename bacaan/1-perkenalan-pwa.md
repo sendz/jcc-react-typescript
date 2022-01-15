@@ -151,7 +151,12 @@ _Pilihan untuk memasang PWA sebagai aplikasi native_
 _Aplikasi yang dipasang dari PWA memiliki UX sebagai native app, perhatikan app bar / window bar yang tidak memiliki fungsi navigasi seperti di web browser_
 
 ## SAATNYA TUGAS
-
+- Mencoba Progressive Web App
+  - Buka salah satu contoh PWA di atas
+  - Pilih install ketika dialog install muncul di browser, terutama di mobile browser smartphone
+  - Buka aplikasi PWA yang sudah terpasang
+  - Tutup aplikasi
+  - Buka kembali dan rasakan perbedaannya antara PWA dengan web app
 - Konversikan aplikasi web atau react app yang sudah ada menjadi PWA
   - Tambahkan file web manifest
   - Buatlah file service worker
