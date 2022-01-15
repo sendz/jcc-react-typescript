@@ -136,6 +136,12 @@ Sebuah PWA haruslah responsive pada setiap ukuran layar, layar desktop dengan uk
 
 Selain itu, pengalaman pengguna (UX) dari PWA juga harus bisa beradaptasi dengan aplikasi native, seperti navigasi, notifikasi, performa, kecepatan saat membuka aplikasi, dan harus bisa dipasang sebagai aplikasi native (installable).
 
+Contoh Aplikasi PWA:
+- [Twitter](https://twitter.com) (Twitter Desktop dan Twitter Lite di mobile browser)
+- [Telegram Web](https://web.telegram.org)
+- [Instasgram Web](https://instagram.com)
+- [Spotify Web](https://open.spotify.com)
+
 ![Install Twitter](assets/install.png)
 
 _Pilihan untuk memasang PWA sebagai aplikasi native_
