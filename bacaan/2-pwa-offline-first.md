@@ -1,6 +1,4 @@
-# PWA Tingkat Lanjut
-
-## Offline First
+# Offline First
 
 Kembali ke tujuan PWA agar aplikasi bisa digunakan dalam kondisi jaringan apapun, baik cepat, lambat atau bahkan tanpa jaringan, PWA harus memiliki konsep _Offline First_ atau _offline support_.
 
@@ -68,7 +66,7 @@ self.addEventListener('fetch', function(event) {
 })
 ```
 
-### Memperbaharui Berkas
+## Memperbaharui Berkas
 
 Untuk memperbaharui isi dari service worker ketika ada update di aplikasi, update version number yang ada di `cacheName` sehingga semua cache baru akan ditambahkan saat `install` dan cache lama akan dihapus saat `activate`. Contoh, dari `'yourApp-cache-Name-v1.0.0'` ke `'yourApp-cache-Name-v1.0.2'`.
 
@@ -81,7 +79,7 @@ const cachedFiles = [
 cachedFiles.push('/public/assets/fallback.css')
 ```
 
-### Menampilkan Halaman Lain ketika _Offline_
+## Menampilkan Halaman Lain ketika _Offline_
 
 Kebanyakan pengguna sangat kesal ketika mereka melihat "gambar dinosaurus" ketika tidak tersambung ke internet ketika sedang membuka aplikasi, kenapa?
 - User tidak bisa melakukan apa-apa
