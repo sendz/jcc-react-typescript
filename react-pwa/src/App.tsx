@@ -1,16 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const [age, setAge] = useState(0)
   useEffect(() => {
     (async () => {
       const response = await fetch('http://localhost:1234/todo')
-      console.log("RESPONSE", response)
+      console.log("RESPONSE", response.json())
     })()
   })
   return (
     <div className="App">
+      <input value={age} type="number" onChange={e => setAge(parseInt(e.target.value))}/>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

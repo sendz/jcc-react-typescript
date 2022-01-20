@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>You are Offline</title>
+    </head>
+    <body>
+        <h1>You are Offline</h1>
+        <p>Seems you have trouble connecting to the internet, click Reload button to reloading</p>
+
+        <button id="reload" type="button">Reload</button>
+
+        <script>
+            document.getElementById('reload').addEventListener('click', () => {
+                window.location.reload()
+            })
+
+            // Listen to network state, reload when online
+            window.addEventListener('online', () => {
+                window.location.reload()
+            })
+
+            // Check if server is responding and reload
+            // Handles when online but the server is offline
+            async function checkServerConnection() {
+                try {
+                    const response = await fetch('.')
+
+                    if (response.status >= 200 && response.status < 500) {
+                        window.location.reload()
+                        return
+                    }
+                } catch {
+                    // Unable to connect
+                }
+                // Check every 3 seconds
+                window.setTimeout(checkServerConnection, 3000)
+            }
+
+            checkServerConnection()
+        </script>
+    </body>
+<html>

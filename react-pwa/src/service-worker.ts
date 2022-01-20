@@ -77,10 +77,33 @@ self.addEventListener('message', (event) => {
   }
 });
 
-const cacheName = 'jcc-v0.0.1'
+const cacheName = 'jcc-v0.0.2'
 
-self.addEventListener('fetch', (event) => {
+self.addEventListener('install', (event) => {
+  event.waitUntil((async () => {
+    const cache = await caches.open(cacheName)
+    await cache.addAll(['offline.html'])
+  })())
+})
+
+self.addEventListener('fetch', (event: any) => {
   console.log("FETCH INTERCEPT", event.request)
+  if (event.request.mode === "navigate") {
+    event.respondWith((async () => {
+      try {
+        const preload = await event.preloadResponse
+        if (preload) {
+          return preload
+        }
+        const networkResponse = await fetch(event.request)
+        return networkResponse
+      } catch (error: any) {
+        const cache = await caches.open(cacheName)
+        const cachedResponse = await cache.match('offline.html')
+        return cachedResponse
+      }
+    })())
+  }
   event.respondWith((async () => {
     
     const cacheResponse = await caches.match(event.request)
