@@ -63,8 +63,8 @@ function registerValidSW(swUrl: string, config?: Config) {
     .then((registration) => {
       registration.pushManager.getSubscription()
         .then((subscription) => {
-          if (subscription === undefined) {
-
+          if (subscription) {
+            return subscription
           } 
 
           return registration.pushManager.subscribe({
