@@ -118,4 +118,24 @@ self.addEventListener('fetch', (event: any) => {
   })())
 })
 
+self.addEventListener('push', (event) => {
+  const notificationBody = event.data?.text() || "No payload"
+  console.log("PUSH", notificationBody)
+  var options = {
+    body: notificationBody,
+    icon: './logo192.png',
+    actions: [
+      {
+        action: 'explore', title: 'Ngobrol lagi'
+      },
+      {
+        action: 'close', title: 'Tutup'
+      }
+    ]
+  }
+  event.waitUntil(
+    self.registration.showNotification('Halo JCC Perjuangan', options)
+  )
+})
+
 // Any other custom service worker logic can go here.
