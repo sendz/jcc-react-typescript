@@ -13,6 +13,9 @@ import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { StaleWhileRevalidate } from 'workbox-strategies';
+import { initializeApp } from "firebase/app";
+import { getMessaging, getToken } from "firebase/messaging";
+
 
 declare const self: ServiceWorkerGlobalScope;
 
@@ -76,6 +79,23 @@ self.addEventListener('message', (event) => {
     self.skipWaiting();
   }
 });
+
+const VAPID_KEY = 'VAPID_KEY'
+const firebaseConfig = {
+  apiKey: "AIzaSyADLNdtomoZyrjjZMNKImXBSgDX1uGiAqs",
+  authDomain: "jabar-cc.firebaseapp.com",
+  projectId: "jabar-cc",
+  storageBucket: "jabar-cc.appspot.com",
+  messagingSenderId: "710064399975",
+  appId: "1:710064399975:web:11a2e31134d9e334a2d6c2"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+const messaging = getMessaging()
+
+getToken(messaging, {vapidKey: VAPID_KEY}).then(token => {console.log('TOKEN', token.toString())})
 
 const cacheName = 'jcc-v0.0.2'
 

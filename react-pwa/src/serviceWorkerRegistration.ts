@@ -10,6 +10,13 @@
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://cra.link/PWA
 
+// Import the functions you need from the SDKs you need
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const VAPID_KEY = 'VAPID_KEY'
+
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
@@ -69,7 +76,7 @@ function registerValidSW(swUrl: string, config?: Config) {
 
           return registration.pushManager.subscribe({
             userVisibleOnly: true,
-            applicationServerKey: 'VAPID_KEY'
+            applicationServerKey: VAPID_KEY
           })
         })
       registration.onupdatefound = () => {
@@ -106,6 +113,9 @@ function registerValidSW(swUrl: string, config?: Config) {
           }
         };
       };
+    })
+    .then((subscription) => {
+      // Registration part to push notif server, use fetch request to send your subscription
     })
     .catch((error) => {
       console.error('Error during service worker registration:', error);
