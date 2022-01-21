@@ -4,16 +4,25 @@ import './App.css';
 
 function App() {
   const [age, setAge] = useState(0)
+  const [message, setMessage] = useState<string>()
   useEffect(() => {
     (async () => {
       const response = await fetch('http://localhost:1234/todo')
       console.log("RESPONSE", response.json())
     })()
   })
+
+  navigator.serviceWorker.onmessage = (event) => {
+    console.log("MESSAGE FROM SERVICE WORKER", event.data)
+    setMessage(`New ${event.data.type} with ${event.data.payload} message`)
+  }
+
   return (
     <div className="App">
-      <input value={age} type="number" onChange={e => setAge(parseInt(e.target.value))}/>
       <header className="App-header">
+        {message && (
+          <p>{message}</p>
+        )}
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.

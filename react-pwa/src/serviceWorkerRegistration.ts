@@ -61,6 +61,17 @@ function registerValidSW(swUrl: string, config?: Config) {
   navigator.serviceWorker
     .register(swUrl)
     .then((registration) => {
+      registration.pushManager.getSubscription()
+        .then((subscription) => {
+          if (subscription) {
+            return subscription
+          }
+
+          return registration.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: 'BIrUOJJynogV5u5XYQWJEpb3l4CCYmsSjgds9T7M-0NM5i9k-5VnyNh5QddcNHPF26r25mOlURaeegpZnsNBQi4'
+          })
+        })
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         if (installingWorker == null) {

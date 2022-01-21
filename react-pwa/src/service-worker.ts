@@ -118,4 +118,46 @@ self.addEventListener('fetch', (event: any) => {
   })())
 })
 
+self.addEventListener('push', (event) => {
+  console.log("PUSH JSON", event.data?.json())
+  if (event.data?.json()) {
+    const data = event.data.json()
+    if (data.type && data.payload) {
+      return self.clients.matchAll().then(clients => {
+        clients.forEach(client => client.postMessage({ type: data.type, payload: data.payload }))
+      })
+    }
+  }
+
+  const notificationBody = event.data?.text() || "No Message"
+  const options = {
+    body: notificationBody,
+    icon: 'logo192.png',
+    actions: [
+      {
+        action: 'explore', title: 'Eksplorasi'
+      },
+      {
+        action: 'close', title: 'Tutup'
+      }
+    ]
+  }
+
+  event.waitUntil(
+    self.registration.showNotification('JCC Perjuangan', options)
+  )
+})
+
+self.addEventListener('notificationclick', (event) => {
+  console.log("ACTION", event.action)
+  if (event.action === 'explore') {
+    event.notification.close()
+    return self.clients.openWindow('https://www.instagram.com/jabarcodingcamp/')
+  } else if (event.action === 'close') {
+    return event.notification.close()
+  }
+  event.notification.close()
+  return self.clients.openWindow('https://jabarcodingcamp.id/')
+})
+
 // Any other custom service worker logic can go here.
