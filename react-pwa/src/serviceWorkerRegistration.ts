@@ -15,7 +15,7 @@
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const VAPID_KEY = 'VAPID_KEY'
+const VAPID_KEY = 'BIrUOJJynogV5u5XYQWJEpb3l4CCYmsSjgds9T7M-0NM5i9k-5VnyNh5QddcNHPF26r25mOlURaeegpZnsNBQi4'
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
@@ -42,7 +42,7 @@ export function register(config?: Config) {
     }
 
     window.addEventListener('load', () => {
-      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
+      const swUrl = `service-worker.js`;
 
       if (isLocalhost) {
         // This is running on localhost. Let's check if a service worker still exists or not.
@@ -160,4 +160,8 @@ export function unregister() {
         console.error(error.message);
       });
   }
+}
+
+navigator.serviceWorker.onmessage = (event) => {
+  console.log("MESSAGE FROM SERVICE WORKER", event.data)
 }
