@@ -10,6 +10,8 @@ Keduanya berjalan di service worker, sehingga update konten dari server dan noti
 
 Sebelum bisa menampilkan notifikasi, aplikasi harus meminta _permission_ untuk mengirimkan notifikasi.
 
+Menguji fitur browser sebelum implementasi, bisa disisipkan di `main.js`, bagian kode ini tidak akan digunakan ketika _push notification_ diterima oleh _service worker_.
+
 ```js
 Notification.requestPermission().then(function(result) {
     if (result === 'granted') {
@@ -33,6 +35,8 @@ Push lebih kompleks, aplikasi diharuskan _subscribe_ ke sebuah server yang akan 
 
 Di dalam berkas `main.js` ketika register service worker, tambahkan bagian `registration.pushManager.getSubscription()` agar aplikasi _subscribe_ ke push service.
 
+`main.js`
+
 ```js
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/service-worker.js')
@@ -49,12 +53,15 @@ if ('serviceWorker' in navigator) {
                     // otherwise, subscribe a new one
 
                     return registration.pushManager.subscribe({
-                        userVisibleOnly: true
+                        userVisibleOnly: true,
+                        applicationServerKey: 'VAPID_KEY'
                     })
                 })
         })
         .then(function (subscription) {
-            fetc('https://server.domain/pushregistrationendpoint', {
+            // Send the subscription detail to your push server
+            // Implementation in GCM may different, use the SDK instead
+            fetch(YOUR_SERVER_PUSH_MESSAGE_HOST + REGISTER_ENDPOINT, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -69,3 +76,38 @@ if ('serviceWorker' in navigator) {
         })
 }
 ```
+
+`service-worker.js`
+
+```js
+self.addEventListener('push', (event) => {
+    const notificationBody = event.data?.text() || "No Message"
+    console.log("PUSH", notificationBody)
+    var options = {
+        body: notificationBody,
+        icon: './logo192.png',
+        actions: [
+            {
+                action: 'explore', title: 'Explore'
+            },
+            {
+                action: 'close', title: 'Close'
+            }
+        ]
+    }
+    event.waitUntil(
+        self.registration.showNotification('NOTIFICATION_TITLE', options)
+    )
+})
+
+```
+
+Untuk mengaktifkan Push Notification, diperlukan VAPID KEY yang bisa didapat dari Google Cloud Messaging, atau tergantung dari implementasi `push server` masing-masing aplikasi.
+
+Untuk menguji push notification, buka Developer Tools -> Applications -> Service Workers, di kolom Push, masukan body push message lalu klik Push.
+
+![Push Test](assets/push-test.png)
+
+Jika setup berjalan dengan baik, service worker akan mengirimkan notifikasi dan memunculkan di layar.
+
+![Push Received](assets/push-received.png)
