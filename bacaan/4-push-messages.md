@@ -6,6 +6,17 @@ Push API digunakan untuk mengerimkan konten baru dari server ke aplikasi tanpa a
 
 Keduanya berjalan di service worker, sehingga update konten dari server dan notifikasi bisa ditampilkan ketika aplikasi tidak sedang dibuka.
 
+## Push API
+
+`service-worker.js`
+
+```js
+self.addEventListener('push', (event) => {
+    console.log("PUSH", event.data)
+    // Add to cache for push data
+})
+```
+
 ## Notifications API
 
 Pada dasarnya, menampilkan Notifikasi bisa saja langsung dari aplikasi, akan tetapi aplikasi harus selalu terbuka untuk menampilkan notifikasi, oleh karena itu notifikasi disimpan di service worker, agar ketika aplikasi tersebut ditutup, notifikasi akan tetap muncul ketika menerima update dari server.
