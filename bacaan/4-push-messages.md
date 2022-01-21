@@ -13,7 +13,7 @@ Keduanya berjalan di service worker, sehingga update konten dari server dan noti
 ```js
 self.addEventListener('push', (event) => {
     console.log("PUSH", event.data)
-    // Add to cache for push data
+    // Add to cache for push data received
 })
 ```
 
