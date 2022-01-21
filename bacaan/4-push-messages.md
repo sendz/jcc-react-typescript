@@ -1,14 +1,14 @@
-# Push Messages
+# Push dan Message
 
-PWA memiliki 2 API, Push API dan Notifications API, keduanya adalah API berbeda tetapi bisa digunakan untuk memberikan fungsionalitas yang bisa menarik pengguna. Push API digunakan untuk mengerimkan konten baru dari server ke aplikasi tanpa adanya campur tangan dari aplikasi _client side_, dan berjalan di service worker. Notifications API bisa digunakan oleh service worker untuk memberikan informasi kepada user berupa notifikasi di sistem operasi.
+Push API dan Notifications API adalah API berbeda tetapi bisa digunakan untuk memberikan fungsionalitas yang bisa menarik pengguna.
+
+Push API digunakan untuk mengerimkan konten baru dari server ke aplikasi tanpa adanya campur tangan dari aplikasi _client side_, dan berjalan di service worker. Data dari Push digunakan untuk menambahkan konten ke cache atau digunakan untuk menampilkan notifikasi ke Notification API.
 
 Keduanya berjalan di service worker, sehingga update konten dari server dan notifikasi bisa ditampilkan ketika aplikasi tidak sedang dibuka.
 
 ## Notifications API
 
-### Request permission
-
-Sebelum bisa menampilkan notifikasi, aplikasi harus meminta _permission_ untuk mengirimkan notifikasi.
+Pada dasarnya, menampilkan Notifikasi bisa saja langsung dari aplikasi, akan tetapi aplikasi harus selalu terbuka untuk menampilkan notifikasi, oleh karena itu notifikasi disimpan di service worker, agar ketika aplikasi tersebut ditutup, notifikasi akan tetap muncul ketika menerima update dari server.
 
 Menguji fitur browser sebelum implementasi, bisa disisipkan di `main.js`, bagian kode ini tidak akan digunakan ketika _push notification_ diterima oleh _service worker_.
 
@@ -29,7 +29,7 @@ function randomNotification() {
 
 ```
 
-### Push
+### Push Notifications
 
 Push lebih kompleks, aplikasi diharuskan _subscribe_ ke sebuah server yang akan mengirim data ke aplikasi, selanjutnya service worker di aplikasi akan menerima data dari push server, kemudian menampilkannya dengan _notification system_.
 
@@ -111,3 +111,53 @@ Untuk menguji push notification, buka Developer Tools -> Applications -> Service
 Jika setup berjalan dengan baik, service worker akan mengirimkan notifikasi dan memunculkan di layar.
 
 ![Push Received](assets/push-received.png)
+
+
+## Message
+
+Cara untuk berkomunikasi antara `service worker` dan `client` adalah dengan mengirimkan event `message` dengan data yang dibutuhkan.
+
+`service-worker.js`
+
+```js
+self.addEventListener('message', event => {
+    console.log('MESSAGE', event.data)
+})
+```
+
+### Service Worker -> Client
+
+`service-worker.js`
+
+```js
+self.clients.matchAll().then(clients => {
+    clients.forEach(client => client.postMessage('Greeting from Service Worker'))
+})
+```
+
+`main.js`
+
+```js
+navigator.serviceWorker.onmessage = (event) => {
+    console.log('Message from Service Worker', event.data)
+}
+```
+
+### Client -> Service Worker
+
+`service-worker.js`
+
+```js
+self.addEventListener('message', event => {
+    console.log('MESSAGE', event.data)
+})
+```
+
+`main.js`
+
+```js
+navigator.serviceWorker.controller.postMessage('Hello service worker!')
+```
+
+Payload untuk message bisa berupa `string`, `number`, atau `object`, misal object `{type: 'MESSAGE_TYPE', payload: 'MESSAGE_PAYLOAD'}`.
+
